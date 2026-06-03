@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PASHAN | Sacred Stone Quiz</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Scripts -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#29170c",
+                        "background": "#fff8f5",
+                        "inverse-on-surface": "#ffede4",
+                        "primary-container": "#a76526",
+                        "on-secondary-fixed-variant": "#0a5041",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#ffeadf",
+                        "on-tertiary-container": "#fffbff",
+                        "surface": "#fff8f5",
+                        "outline": "#857467",
+                        "on-background": "#29170c",
+                        "on-primary-fixed-variant": "#6d3900",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#ffe3d3",
+                        "secondary-container": "#b0f0da",
+                        "outline-variant": "#d8c3b4",
+                        "tertiary-fixed": "#ffdf9f",
+                        "on-tertiary-fixed": "#261a00",
+                        "secondary-fixed": "#b0f0da",
+                        "primary-fixed-dim": "#ffb77c",
+                        "surface-variant": "#fedcc8",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary": "#765700",
+                        "tertiary-container": "#946f05",
+                        "on-secondary-container": "#316f5e",
+                        "secondary-fixed-dim": "#95d3be",
+                        "on-primary-fixed": "#2e1500",
+                        "on-secondary-fixed": "#002018",
+                        "surface-container-highest": "#fedcc8",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "surface-dim": "#f5d3c0",
+                        "primary-fixed": "#ffdcc2",
+                        "secondary": "#2a6958",
+                        "on-primary-container": "#fffbff",
+                        "surface-container-low": "#fff1ea",
+                        "primary": "#894d0e",
+                        "tertiary-fixed-dim": "#eec058",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#8c4f11",
+                        "surface-bright": "#fff8f5",
+                        "inverse-surface": "#402c1f",
+                        "inverse-primary": "#ffb77c",
+                        "on-surface-variant": "#534439"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "label-caps": ["Inter"],
+                        "headline-md": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Playfair Display"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "label-caps": ["11px", { "lineHeight": "1.0", "letterSpacing": "0.18em", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "400" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "0.04em", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .canvas-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #fff8f5 0%, #ffe3d3 100%);
+        }
+        .quiz-container {
+            backdrop-filter: blur(10px);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+        }
+        .fade-out { opacity: 0; transform: translateY(-20px); }
+        .fade-in { opacity: 1; transform: translateY(0); }
+        .option-card:hover {
+            border-color: #894d0e;
+            background-color: #fff1ea;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-fixed-dim selection:text-on-primary-fixed">
+<canvas class="canvas-bg" id="particleCanvas"></canvas>
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-desktop py-4 bg-inverse-surface dark:bg-inverse-surface border-b-[0.5px] border-outline">
+<div class="font-headline-md text-headline-md text-on-primary-fixed tracking-widest">PASHAN</div>
+<div class="hidden md:flex gap-8">
+<a class="font-headline-sm text-headline-sm text-on-primary-fixed-variant dark:text-on-surface-variant hover:text-primary-fixed-dim transition-colors duration-300" href="#">Rituals</a>
+<a class="font-headline-sm text-headline-sm text-on-primary-fixed-variant dark:text-on-surface-variant hover:text-primary-fixed-dim transition-colors duration-300" href="#">Collections</a>
+<a class="font-headline-sm text-headline-sm text-on-primary-fixed-variant dark:text-on-surface-variant hover:text-primary-fixed-dim transition-colors duration-300" href="#">Sacred Stones</a>
+<a class="font-headline-sm text-headline-sm text-on-primary-fixed-variant dark:text-on-surface-variant hover:text-primary-fixed-dim transition-colors duration-300" href="#">Philosophy</a>
+</div>
+<div class="flex items-center gap-6 text-on-primary-fixed">
+<span class="material-symbols-outlined cursor-pointer hover:scale-95 duration-200">shopping_bag</span>
+<span class="material-symbols-outlined cursor-pointer hover:scale-95 duration-200">person</span>
+<button class="bg-primary text-on-tertiary px-6 py-2 font-label-caps text-label-caps hover:bg-primary-container transition-all">SHOP NOW</button>
+</div>
+</nav>
+<main class="min-h-screen pt-32 pb-16 px-margin-mobile md:px-margin-desktop flex flex-col items-center justify-center">
+<!-- Progress Bar -->
+<div class="w-full max-w-2xl mb-12 relative h-[1px] bg-outline-variant" id="progressBarContainer">
+<div class="absolute top-0 left-0 h-full bg-primary transition-all duration-700" id="progressLine" style="width: 0%;"></div>
+<div class="absolute -top-3 left-0 w-full flex justify-between px-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+</div>
+</div>
+<!-- Quiz Shell -->
+<div class="w-full max-w-5xl quiz-container" id="quiz-flow">
+<!-- Question 1 -->
+<section class="quiz-step flex flex-col items-center text-center" id="step-1">
+<span class="font-label-caps text-label-caps text-primary mb-4 uppercase">Purpose &amp; Intent</span>
+<h1 class="font-headline-md text-headline-md italic mb-12 text-on-surface">What is your primary intention today?</h1>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter w-full max-w-3xl mx-auto">
+<button class="option-card border-[0.5px] border-outline-variant p-10 bg-surface-container-lowest transition-all duration-300 flex flex-col items-center gap-4 group" onclick="nextStep(1, 'calm')">
+<span class="material-symbols-outlined text-primary text-4xl">self_improvement</span>
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">Inner Peace &amp; Clarity</span>
+</button>
+<button class="option-card border-[0.5px] border-outline-variant p-10 bg-surface-container-lowest transition-all duration-300 flex flex-col items-center gap-4 group" onclick="nextStep(1, 'protection')">
+<span class="material-symbols-outlined text-primary text-4xl">shield</span>
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">Protection &amp; Grounding</span>
+</button>
+<button class="option-card border-[0.5px] border-outline-variant p-10 bg-surface-container-lowest transition-all duration-300 flex flex-col items-center gap-4 group" onclick="nextStep(1, 'love')">
+<span class="material-symbols-outlined text-primary text-4xl">favorite</span>
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">Love &amp; Emotional Healing</span>
+</button>
+<button class="option-card border-[0.5px] border-outline-variant p-10 bg-surface-container-lowest transition-all duration-300 flex flex-col items-center gap-4 group" onclick="nextStep(1, 'vitality')">
+<span class="material-symbols-outlined text-primary text-4xl">bolt</span>
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">Abundance &amp; Vitality</span>
+</button>
+</div>
+</section>
+<!-- Question 2 -->
+<section class="quiz-step hidden flex flex-col items-center text-center" id="step-2">
+<span class="font-label-caps text-label-caps text-primary mb-4 uppercase">Elemental Alignment</span>
+<h1 class="font-headline-md text-headline-md italic mb-12 text-on-surface">Which element do you feel most drawn to?</h1>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter w-full max-w-3xl mx-auto">
+<button class="option-card border-[0.5px] border-outline-variant p-10 bg-surface-container-lowest transition-all duration-300 group" onclick="nextStep(2, 'water')">
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">The Eternal Flow (Water)</span>
+</button>
+<button class="option-card border-[0.5px] border-outline-variant p-10 bg-surface-container-lowest transition-all duration-300 group" onclick="nextStep(2, 'earth')">
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">The Steady Earth (Mountain)</span>
+</button>
+<button class="option-card border-[0.5px] border-outline-variant p-10 bg-surface-container-lowest transition-all duration-300 group" onclick="nextStep(2, 'fire')">
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">The Sacred Flame (Fire)</span>
+</button>
+<button class="option-card border-[0.5px] border-outline-variant p-10 bg-surface-container-lowest transition-all duration-300 group" onclick="nextStep(2, 'air')">
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">The Boundless Sky (Air)</span>
+</button>
+</div>
+</section>
+<!-- Question 3 -->
+<section class="quiz-step hidden flex flex-col items-center text-center" id="step-3">
+<span class="font-label-caps text-label-caps text-primary mb-4 uppercase">Spiritual Rhythm</span>
+<h1 class="font-headline-md text-headline-md italic mb-12 text-on-surface">When do you feel most at one with your spirit?</h1>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter w-full max-w-3xl mx-auto">
+<button class="option-card border-[0.5px] border-outline-variant p-10 bg-surface-container-lowest transition-all duration-300 group" onclick="showResults()">
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">Under the morning sun</span>
+</button>
+<button class="option-card border-[0.5px] border-outline-variant p-10 bg-surface-container-lowest transition-all duration-300 group" onclick="showResults()">
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">Beneath the full moon</span>
+</button>
+<button class="option-card border-[0.5px] border-outline-variant p-10 bg-surface-container-lowest transition-all duration-300 group" onclick="showResults()">
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">In the silence of twilight</span>
+</button>
+<button class="option-card border-[0.5px] border-outline-variant p-10 bg-surface-container-lowest transition-all duration-300 group" onclick="showResults()">
+<span class="font-body-md text-body-md group-hover:text-primary transition-colors">During the midday zenith</span>
+</button>
+</div>
+</section>
+<!-- Refined Results State -->
+<section class="quiz-step hidden w-full flex flex-col items-center" id="results">
+<div class="text-center mb-12">
+<span class="font-label-caps text-label-caps text-primary mb-4 block uppercase tracking-[0.3em]">Your Sacred Match</span>
+<h1 class="font-headline-md text-headline-md italic text-on-surface">The Stars and Stones have Spoken</h1>
+</div>
+<!-- Cinematic Product Showcase -->
+<div class="w-full grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-16 px-4 md:px-0">
+<div class="relative aspect-square overflow-hidden bg-surface-container-low border-[0.5px] border-outline-variant group">
+<img alt="Sacred Stone" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100" id="stoneImg" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYKZ2NH6t4vGgih90ya2yXK7NVs_Ft6siZsX8AosTh6v3WvEoeQG8HhlW2ZodBFO2vbmFw_uEiTsy4k2iJ-QZhpfsLhyV1h8t7NrDcEKpvEyS8qbhMNOhULVCbCTBrnnwpV1E99e3RlxhI2nqDq4avUbH9Y62rXRH4zmxgXeC6Q0ZMahuZWYytG7WMtARn4NDNfleFW0XyK5X9dFOmlBQvwGNXvsdbhMWlaqlaTi5IgBKgP1w2Zs4rMeR8OZ6h6s8jHfZP5P22C2Lj"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent pointer-events-none"></div>
+</div>
+<div class="flex flex-col items-start text-left">
+<div class="mb-8">
+<h2 class="font-headline-sm text-headline-md mb-2 text-on-surface" id="stoneName">Royal Amethyst</h2>
+<p class="font-label-caps text-label-caps text-primary tracking-widest" id="stoneSubtitle">THE STONE OF SPIRITUAL CLARITY</p>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8 leading-relaxed italic" id="stoneDesc">
+                        Resonating with the subtle vibrations of the higher self, this sacred gem acts as a conduit for celestial wisdom. Its deep violet hues provide a bridge between the physical and ethereal realms, clearing the path for profound inner silence.
+                    </p>
+<div class="font-headline-sm text-headline-sm text-primary mb-12" id="stonePrice">$280.00</div>
+<div class="flex flex-col sm:flex-row items-center gap-8 w-full">
+<button class="w-full sm:w-auto bg-primary text-on-tertiary px-12 py-5 font-label-caps text-label-caps hover:bg-primary-container transition-all flex items-center justify-center gap-4 group">
+                            ADD TO RITUAL
+                            <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+<button class="font-label-caps text-[10px] tracking-[0.2em] text-outline hover:text-primary transition-colors uppercase border-b border-transparent hover:border-primary pb-1" onclick="location.reload()">
+                            Restart Discovery
+                        </button>
+</div>
+</div>
+</div>
+<!-- Sacred Properties Grid -->
+<div class="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 border-t-[0.5px] border-b-[0.5px] border-outline-variant py-12 gap-8 md:gap-0">
+<div class="flex flex-col items-center text-center px-8 md:border-r-[0.5px] border-outline-variant">
+<span class="font-label-caps text-[10px] text-outline mb-3 uppercase tracking-widest">Primary Energy</span>
+<span class="font-headline-sm text-body-lg text-on-surface" id="propEnergy">Crown Chakra</span>
+</div>
+<div class="flex flex-col items-center text-center px-8 md:border-r-[0.5px] border-outline-variant">
+<span class="font-label-caps text-[10px] text-outline mb-3 uppercase tracking-widest">Governing Element</span>
+<span class="font-headline-sm text-body-lg text-on-surface" id="propElement">Ether</span>
+</div>
+<div class="flex flex-col items-center text-center px-8">
+<span class="font-label-caps text-[10px] text-outline mb-3 uppercase tracking-widest">Sacred Frequency</span>
+<span class="font-headline-sm text-body-lg text-on-surface" id="propFrequency">963 Hz</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full px-margin-desktop py-16 grid grid-cols-1 md:grid-cols-4 gap-gutter bg-on-surface dark:bg-on-background">
+<div class="col-span-1 md:col-span-1">
+<div class="font-headline-sm text-headline-sm text-on-primary-fixed mb-4">PASHAN</div>
+<p class="font-body-sm text-body-sm text-surface-variant opacity-80">
+            Crafting architecture for the soul through the precision of Vedic science.
+        </p>
+</div>
+<div>
+<span class="font-label-caps text-label-caps text-primary mb-6 block">EXPLORE</span>
+<ul class="flex flex-col gap-3 font-body-sm text-body-sm text-surface-variant">
+<li><a class="hover:text-primary-fixed transition-all" href="#">Sacred Rituals</a></li>
+<li><a class="hover:text-primary-fixed transition-all" href="#">Gemstone Care</a></li>
+<li><a class="hover:text-primary-fixed transition-all" href="#">Shipping &amp; Returns</a></li>
+</ul>
+</div>
+<div>
+<span class="font-label-caps text-label-caps text-primary mb-6 block">LEGAL</span>
+<ul class="flex flex-col gap-3 font-body-sm text-body-sm text-surface-variant">
+<li><a class="hover:text-primary-fixed transition-all" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary-fixed transition-all" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div class="flex flex-col items-start md:items-end justify-between">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-100 opacity-80">language</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:opacity-100 opacity-80">share</span>
+</div>
+<p class="font-body-sm text-body-sm text-surface-variant opacity-60 text-right mt-8 md:mt-0 uppercase tracking-widest">
+            © 2024 PASHAN - SACRED STONE ARCHITECTURE.
+        </p>
+</div>
+</footer>
+<script>
+    // Particle Background Logic
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Particle {
+        constructor() {
+            this.reset();
+        }
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = canvas.height + 10;
+            this.size = Math.random() * 2 + 0.5;
+            this.speed = Math.random() * 0.3 + 0.1;
+            this.opacity = Math.random() * 0.3 + 0.05;
+        }
+        update() {
+            this.y -= this.speed;
+            if (this.y < -10) this.reset();
+        }
+        draw() {
+            ctx.fillStyle = `rgba(137, 77, 14, ${this.opacity})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    for (let i = 0; i < 40; i++) {
+        particles.push(new Particle());
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+        requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Quiz State Logic
+    let selections = {
+        intent: '',
+        element: ''
+    };
+
+    function nextStep(step, value) {
+        if (step === 1) selections.intent = value;
+        if (step === 2) selections.element = value;
+
+        const currentEl = document.getElementById(`step-${step}`);
+        const nextEl = document.getElementById(`step-${step + 1}`);
+        const progress = document.getElementById('progressLine');
+
+        currentEl.classList.add('fade-out');
+        
+        setTimeout(() => {
+            currentEl.classList.add('hidden');
+            nextEl.classList.remove('hidden');
+            nextEl.classList.add('fade-in');
+            progress.style.width = `${(step / 3) * 100}%`;
+        }, 500);
+    }
+
+    function showResults() {
+        const currentEl = document.getElementById('step-3');
+        const resultsEl = document.getElementById('results');
+        const progressBar = document.getElementById('progressBarContainer');
+        const progressLine = document.getElementById('progressLine');
+        
+        // Element IDs for update
+        const stoneName = document.getElementById('stoneName');
+        const stoneSubtitle = document.getElementById('stoneSubtitle');
+        const stoneImg = document.getElementById('stoneImg');
+        const stoneDesc = document.getElementById('stoneDesc');
+        const stonePrice = document.getElementById('stonePrice');
+        const propEnergy = document.getElementById('propEnergy');
+        const propElement = document.getElementById('propElement');
+        const propFrequency = document.getElementById('propFrequency');
+
+        // Logic for Stone Selection Content
+        if (selections.intent === 'protection') {
+            stoneName.innerText = 'Black Tourmaline';
+            stoneSubtitle.innerText = 'THE STONE OF SACRED SHIELDING';
+            stoneImg.src = 'https://images.unsplash.com/photo-1615192283021-d9bb73071850?q=80&w=1200&auto=format&fit=crop';
+            stoneDesc.innerText = 'A powerful grounding stone that acts as a psychic shield, deflecting negative energies while establishing a deep connection between the human spirit and the Earth\'s core.';
+            stonePrice.innerText = '$245.00';
+            propEnergy.innerText = 'Root Chakra';
+            propElement.innerText = 'Earth';
+            propFrequency.innerText = '396 Hz';
+        } else if (selections.intent === 'love') {
+            stoneName.innerText = 'Rose Quartz';
+            stoneSubtitle.innerText = 'THE STONE OF INFINITE COMPASSION';
+            stoneImg.src = 'https://images.unsplash.com/photo-1615192283021-d9bb73071850?q=80&w=1200&auto=format&fit=crop';
+            stoneDesc.innerText = 'Radiating with the gentle essence of unconditional love, Rose Quartz opens the heart at all levels to promote deep inner healing and feelings of profound peace.';
+            stonePrice.innerText = '$190.00';
+            propEnergy.innerText = 'Heart Chakra';
+            propElement.innerText = 'Water';
+            propFrequency.innerText = '639 Hz';
+        } else if (selections.intent === 'vitality') {
+            stoneName.innerText = 'Citrine Quartz';
+            stoneSubtitle.innerText = 'THE STONE OF DIVINE ABUNDANCE';
+            stoneImg.src = 'https://images.unsplash.com/photo-1551009804-f584e23ed331?q=80&w=1200&auto=format&fit=crop';
+            stoneDesc.innerText = 'Carrying the power of the sun, Citrine is a premier stone of manifestation, imagination, and personal will. It transforms negative thoughts into positive energy.';
+            stonePrice.innerText = '$310.00';
+            propEnergy.innerText = 'Solar Plexus';
+            propElement.innerText = 'Fire';
+            propFrequency.innerText = '528 Hz';
+        } else {
+            // Default Amethyst
+            stoneName.innerText = 'Royal Amethyst';
+            stoneSubtitle.innerText = 'THE STONE OF SPIRITUAL CLARITY';
+            stoneImg.src = 'https://images.unsplash.com/photo-1551009804-f584e23ed331?q=80&w=1200&auto=format&fit=crop';
+            stoneDesc.innerText = 'Resonating with the subtle vibrations of the higher self, this sacred gem acts as a conduit for celestial wisdom. Its deep violet hues provide a bridge between the physical and ethereal realms.';
+            stonePrice.innerText = '$280.00';
+            propEnergy.innerText = 'Crown Chakra';
+            propElement.innerText = 'Ether';
+            propFrequency.innerText = '963 Hz';
+        }
+
+        currentEl.classList.add('fade-out');
+        
+        setTimeout(() => {
+            currentEl.classList.add('hidden');
+            progressBar.classList.add('opacity-0');
+            progressLine.style.width = '100%';
+            
+            resultsEl.classList.remove('hidden');
+            resultsEl.classList.add('fade-in');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 500);
+    }
+</script>
+</body></html>

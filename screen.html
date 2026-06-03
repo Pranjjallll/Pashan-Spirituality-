@@ -1,0 +1,731 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>PASHAN | Sacred Stone Architecture</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&amp;family=Inter:wght@300;400;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#fff1ea",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#95d3be",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#fedcc8",
+                        "surface-container-high": "#ffe3d3",
+                        "secondary": "#2a6958",
+                        "surface-container-highest": "#fedcc8",
+                        "background": "#F5EFE6",
+                        "outline-variant": "#d8c3b4",
+                        "on-surface-variant": "#534439",
+                        "tertiary-fixed-dim": "#eec058",
+                        "on-primary-fixed-variant": "#6d3900",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#ffdf9f",
+                        "on-secondary-fixed-variant": "#0a5041",
+                        "secondary-fixed": "#b0f0da",
+                        "on-tertiary-container": "#fffbff",
+                        "on-secondary-container": "#316f5e",
+                        "tertiary-container": "#946f05",
+                        "on-surface": "#29170c",
+                        "surface-tint": "#8c4f11",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#fffbff",
+                        "on-secondary": "#ffffff",
+                        "outline": "#857467",
+                        "surface": "#fff8f5",
+                        "inverse-primary": "#ffb77c",
+                        "surface-container": "#ffeadf",
+                        "on-background": "#29170c",
+                        "inverse-on-surface": "#ffede4",
+                        "on-primary-fixed": "#2e1500",
+                        "primary": "#894d0e",
+                        "inverse-surface": "#2C1A0E",
+                        "tertiary": "#765700",
+                        "on-tertiary-fixed-variant": "#5b4300",
+                        "surface-bright": "#fff8f5",
+                        "primary-fixed": "#ffdcc2",
+                        "secondary-container": "#b0f0da",
+                        "surface-dim": "#f5d3c0",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#002018",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#a76526",
+                        "primary-fixed-dim": "#ffb77c",
+                        "on-tertiary-fixed": "#261a00",
+                        "copper": "#C17A3A",
+                        "teal-brand": "#2D6B5A",
+                        "gold-brand": "#D4A843"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "20px",
+                        "container-max": "1280px"
+                    },
+                    fontFamily: {
+                        "headline-md": ["Playfair Display"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Playfair Display"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "label-caps": ["Inter"]
+                    },
+                    fontSize: {
+                        "headline-md": ["32px", {"lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "headline-sm": ["24px", {"lineHeight": "1.3", "letterSpacing": "0.02em", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "0.04em", "fontWeight": "400"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "0.04em", "fontWeight": "400"}],
+                        "label-caps": ["11px", {"lineHeight": "1.0", "letterSpacing": "0.18em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-scroll {
+            animation: scroll 30s linear infinite;
+        }
+        .letter-spacing-custom { letter-spacing: 0.18em; }
+        .border-05 { border-width: 0.5px; }
+        .pashan-shadow:hover { box-shadow: 0 20px 40px -15px rgba(44, 26, 14, 0.15); }
+        canvas { display: block; }
+        
+        .product-card:hover .gem-canvas { opacity: 0; }
+        .product-card:hover .hover-video { opacity: 1; visibility: visible; }
+        .hover-video { opacity: 0; visibility: hidden; transition: opacity 0.5s ease; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- Section 1: Scrolling Announcement Bar -->
+<div class="w-full bg-inverse-surface py-2 overflow-hidden border-b border-copper/20 z-[60] relative">
+<div class="flex whitespace-nowrap animate-scroll">
+<div class="flex items-center gap-12 px-6">
+<span class="text-background font-label-caps text-label-caps uppercase">Free Ritual Kits on orders above ₹5000</span>
+<span class="text-copper font-label-caps text-label-caps uppercase">⬥</span>
+<span class="text-background font-label-caps text-label-caps uppercase">Ganga Jal Purified Stones</span>
+<span class="text-copper font-label-caps text-label-caps uppercase">⬥</span>
+<span class="text-background font-label-caps text-label-caps uppercase">Sthapatya Architectural Precision</span>
+<span class="text-copper font-label-caps text-label-caps uppercase">⬥</span>
+<span class="text-background font-label-caps text-label-caps uppercase">Authentic Vedic Certifications</span>
+</div>
+<div class="flex items-center gap-12 px-6">
+<span class="text-background font-label-caps text-label-caps uppercase">Free Ritual Kits on orders above ₹5000</span>
+<span class="text-copper font-label-caps text-label-caps uppercase">⬥</span>
+<span class="text-background font-label-caps text-label-caps uppercase">Ganga Jal Purified Stones</span>
+<span class="text-copper font-label-caps text-label-caps uppercase">⬥</span>
+<span class="text-background font-label-caps text-label-caps uppercase">Sthapatya Architectural Precision</span>
+<span class="text-copper font-label-caps text-label-caps uppercase">⬥</span>
+<span class="text-background font-label-caps text-label-caps uppercase">Authentic Vedic Certifications</span>
+</div>
+</div>
+</div>
+<!-- Section 2: Sticky TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-inverse-surface border-b-[0.5px] border-outline/30 px-margin-desktop py-4 flex justify-between items-center transition-transform duration-300 translate-y-[32px]">
+<a class="flex flex-col items-center" href="#">
+<span class="font-headline-md text-background text-[20px] tracking-widest leading-none italic">PASHAN</span>
+<span class="text-copper font-body-sm text-[10px] tracking-[0.4em] mt-1">पा षा ण</span>
+</a>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-background/80 hover:text-copper transition-colors font-label-caps text-label-caps uppercase" href="#rituals">Rituals</a>
+<a class="text-background/80 hover:text-copper transition-colors font-label-caps text-label-caps uppercase" href="#collections">Collections</a>
+<a class="text-background/80 hover:text-copper transition-colors font-label-caps text-label-caps uppercase" href="#products">Sacred Stones</a>
+<a class="text-background/80 hover:text-copper transition-colors font-label-caps text-label-caps uppercase" href="#sthapatya">The Science</a>
+<a class="text-background/80 hover:text-copper transition-colors font-label-caps text-label-caps uppercase" href="#philosophy">Philosophy</a>
+</nav>
+<div class="flex md:hidden items-center ml-4"><span class="material-symbols-outlined text-background cursor-pointer hover:text-copper transition-all" data-icon="menu">menu</span></div>
+<div class="flex items-center gap-6">
+<div class="flex gap-4 text-background">
+<span class="material-symbols-outlined cursor-pointer hover:text-copper transition-all" data-icon="search">search</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-copper transition-all" data-icon="shopping_bag">shopping_bag</span>
+</div>
+<a class="bg-copper text-background px-6 py-2 font-label-caps text-label-caps uppercase border-05 border-copper hover:bg-transparent hover:text-copper transition-all duration-300 flex items-center justify-center text-center" href="#products">Shop Now</a>
+</div>
+</header>
+<!-- Section 3: Hero with Gem Canvas -->
+<section class="relative h-screen w-full flex items-center justify-center overflow-hidden pt-16">
+<canvas class="absolute inset-0 z-0" height="9953" id="hero-canvas" width="1280"></canvas>
+<div class="relative z-10 text-center px-margin-desktop">
+<h1 class="font-display-lg text-display-lg text-inverse-surface mb-6 max-w-4xl mx-auto italic">Wear the energy of the Earth &amp; Ganga</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-10">Architecturally precise gemstones, purified by the eternal flow of the Ganges. Sthapatya-aligned jewelry for the modern seeker.</p>
+<div class="flex justify-center gap-6">
+<a class="bg-copper text-background px-10 py-4 font-label-caps text-label-caps uppercase tracking-widest hover:bg-inverse-surface transition-all duration-500 inline-block text-center" href="#products">Explore Sacred Stones</a>
+</div>
+</div>
+<div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+<span class="text-copper font-label-caps text-[10px] uppercase tracking-[0.3em]">Scroll to Discover</span>
+<div class="w-[1px] h-12 bg-copper/30 relative">
+<div class="absolute top-0 left-0 w-full h-1/2 bg-copper animate-bounce"></div>
+</div>
+</div>
+</section>
+<!-- NEW SECTION: The Vedic Science of Sthapatya -->
+<section class="py-32 px-margin-desktop bg-inverse-surface text-background" id="sthapatya">
+<div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+<div class="order-2 md:order-1">
+<span class="text-copper font-label-caps text-label-caps uppercase mb-4 block">Ancient Mathematics</span>
+<h2 class="font-headline-md text-headline-md text-background mb-8 italic">The Vedic Science of Sthapatya</h2>
+<p class="font-body-md text-background/80 mb-6 leading-relaxed">Sthapatya Veda is the oldest architectural science on Earth. It dictates that every material object has a frequency determined by its geometric proportions. We don't just cut stones; we architect them.</p>
+<div class="space-y-6">
+<div class="flex gap-6 items-start">
+<span class="material-symbols-outlined text-copper mt-1" data-icon="architecture">architecture</span>
+<div>
+<h4 class="font-headline-sm text-[18px] text-background mb-2 italic">Mathematical Precision</h4>
+<p class="text-body-sm text-background/60">Every facet is calculated using the 'Aya' formula to ensure the stone vibrates in resonance with the wearer's bio-magnetic field.</p>
+</div>
+</div>
+<div class="flex gap-6 items-start">
+<span class="material-symbols-outlined text-copper mt-1" data-icon="grid_4x4">grid_4x4</span>
+<div>
+<h4 class="font-headline-sm text-[18px] text-background mb-2 italic">Universal Alignment</h4>
+<p class="text-body-sm text-background/60">Orientation based on Cardinal directions during the cutting process ensures that cosmic energy flows unimpeded through the crystal lattice.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative group order-1 md:order-2 overflow-hidden border-05 border-copper/30">
+<img class="w-full h-[600px] object-cover opacity-80 group-hover:scale-105 transition-transform duration-1000" data-alt="A sophisticated architectural drawing overlaid on a high-resolution photograph of a raw quartz crystal. The drawing features delicate gold lines of sacred geometry—phi spirals, hexagonal grids, and Vedic mandalas—perfectly aligning with the natural facets of the stone. The background is a deep, velvety dark brown, suggesting an ancient workshop or a monk's study." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn6j8H-O9B7y4K0G9X4U1y5o3u2z1v5z6w8x9y0z1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t">
+</div>
+</div>
+</section>
+<!-- Section 4: Brand Intro (Sacred Geometry) -->
+<section class="py-32 px-margin-desktop bg-surface-container-low border-y border-outline/10" id="philosophy">
+<div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-2 gap-24 items-center">
+<div class="relative group">
+<div class="absolute -inset-4 border-05 border-copper/20 transition-all group-hover:inset-0"></div>
+<img class="w-full h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-700" data-alt="Macro photo of amethyst on stone pedestal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhDQheIBGFLNB551eBU5AMtpy-Y5Jq7b_GoqEPrMePcee2dKmnURiejIaRXxtJPHcIbPThH8hzf533HV25cFa7hZRRgJ2mzQckZeu8sJY2mOIVoi3nLbwBEQVc4ScvtiYVBzfLY633qlrV_P0SNLSVgbDJxxKJuuliNZv31cQfa3ubnmvbrInDiaO6KxqmPrs7KPojYQu_RA7D6ieGhucrdKtEhqqVEDE-gKSMClVF6F0yYl3L4UKEhZ2ZY8-hjKzNRhb-jr41SfNf">
+</div>
+<div>
+<span class="text-copper font-label-caps text-label-caps uppercase mb-4 block">Our Origin</span>
+<h2 class="font-headline-md text-headline-md text-inverse-surface mb-8 italic">The Essence of Pashan</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 leading-relaxed">Pashan is not merely jewelry; it is architecture for the soul. Each stone is selected based on the ancient Vedic science of Sthapatya—the harmony between space, material, and human energy.</p>
+<div class="grid grid-cols-2 gap-8 mt-12">
+<div>
+<h4 class="font-headline-sm text-[18px] text-copper mb-2 italic">Sacred Cuts</h4>
+<p class="text-body-sm text-on-surface-variant">Faceted to align with cosmic geometry, maximizing light refraction and energetic output.</p>
+</div>
+<div>
+<h4 class="font-headline-sm text-[18px] text-copper mb-2 italic">Earth Anchors</h4>
+<p class="text-body-sm text-on-surface-variant">Untouched by heavy machinery, preserving the primal vibration of the lithosphere.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5: The Philosophy Banner -->
+<section class="h-[60vh] relative flex items-center justify-center overflow-hidden bg-inverse-surface">
+<img class="absolute inset-0 w-full h-full object-cover opacity-40" data-alt="Ganges river at dawn" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8-NF_4CcBP8J_MrleQRe9-immsqkYyLsTSHrw11CcTiUvExdSS-jkpCKv_ItPtBMKudlKZhovg2iXDNoIKxHVNN4FIKcA4hpalaWtdfkNmu4ls1Q3KsVH9XD77kuN9q-Wt2S5kMwUdhv20tlFR_FKPCg7gGELFf9y-D74VpJtpkbNRmWNmozUlT0R6gsq8oB4eTUDA6kTditRJKqgg8mMwYRB9blgj1lz3z2N7YDf8jscy92ytLYO9zlSXjfODiwTZ0O2LcCfz4ev">
+<div class="relative z-10 text-center">
+<h2 class="font-display-lg text-display-lg text-background italic px-6">"As the stone, so the spirit."</h2>
+</div>
+</section>
+<!-- Section 6: Product Cards with Canvas Gems -->
+<section class="py-32 px-margin-desktop bg-background" id="products">
+<div class="text-center mb-20">
+<span class="text-copper font-label-caps text-label-caps uppercase mb-4 block">Curation</span>
+<h2 class="font-headline-md text-headline-md text-inverse-surface italic">Choose your energy intention</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Amethyst -->
+<div class="product-card group bg-[#fff8f5] border-05 border-outline/20 pashan-shadow transition-all duration-500 overflow-hidden relative">
+<div class="h-64 relative bg-surface-container flex items-center justify-center overflow-hidden">
+<canvas class="gem-canvas absolute inset-0 transition-opacity duration-500" height="200" id="gem-amethyst" width="200"></canvas>
+<video autoplay="" class="hover-video absolute inset-0 w-full h-full object-cover grayscale brightness-110" loop="" muted="" playsinline="">
+<source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-purple-amethyst-crystals-42354-large.mp4" type="video/mp4">
+</video>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-sm text-headline-sm text-inverse-surface uppercase tracking-wider italic">Amethyst</h3>
+<span class="text-copper font-label-caps text-label-caps">₹14,900</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mb-6">The Stone of Spiritual Clarity. Architecturally cut to a 12-face dodecahedron.</p>
+<button class="add-to-ritual-btn w-full border-05 border-copper py-3 text-copper font-label-caps text-label-caps uppercase hover:bg-copper hover:text-background transition-all">Add to Ritual</button>
+</div>
+</div>
+<!-- Tourmaline -->
+<div class="product-card group bg-[#fff8f5] border-05 border-outline/20 pashan-shadow transition-all duration-500 overflow-hidden relative">
+<div class="h-64 relative bg-surface-container flex items-center justify-center overflow-hidden">
+<canvas class="gem-canvas absolute inset-0 transition-opacity duration-500" height="200" id="gem-tourmaline" width="200"></canvas>
+<video autoplay="" class="hover-video absolute inset-0 w-full h-full object-cover grayscale brightness-50" loop="" muted="" playsinline="">
+<source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-black-minerals-42356-large.mp4" type="video/mp4">
+</video>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-sm text-headline-sm text-inverse-surface uppercase tracking-wider italic">Tourmaline</h3>
+<span class="text-copper font-label-caps text-label-caps">₹18,500</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mb-6">The Shield Stone. Hexagonal precision for electromagnetic protection.</p>
+<button class="add-to-ritual-btn w-full border-05 border-copper py-3 text-copper font-label-caps text-label-caps uppercase hover:bg-copper hover:text-background transition-all">Add to Ritual</button>
+</div>
+</div>
+<!-- Rose Quartz -->
+<div class="product-card group bg-[#fff8f5] border-05 border-outline/20 pashan-shadow transition-all duration-500 overflow-hidden relative">
+<div class="h-64 relative bg-surface-container flex items-center justify-center overflow-hidden">
+<canvas class="gem-canvas absolute inset-0 transition-opacity duration-500" height="200" id="gem-rose" width="200"></canvas>
+<video autoplay="" class="hover-video absolute inset-0 w-full h-full object-cover sepia-[0.3] brightness-125" loop="" muted="" playsinline="">
+<source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-pink-crystals-42357-large.mp4" type="video/mp4">
+</video>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-sm text-headline-sm text-inverse-surface uppercase tracking-wider italic">Rose Quartz</h3>
+<span class="text-copper font-label-caps text-label-caps">₹12,200</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mb-6">The Anahata Anchor. Spherical polishing for infinite compassion flow.</p>
+<button class="add-to-ritual-btn w-full border-05 border-copper py-3 text-copper font-label-caps text-label-caps uppercase hover:bg-copper hover:text-background transition-all">Add to Ritual</button>
+</div>
+</div>
+<!-- Tiger's Eye -->
+<div class="product-card group bg-[#fff8f5] border-05 border-outline/20 pashan-shadow transition-all duration-500 overflow-hidden relative">
+<div class="h-64 relative bg-surface-container flex items-center justify-center overflow-hidden">
+<canvas class="gem-canvas absolute inset-0 transition-opacity duration-500" height="200" id="gem-tiger" width="200"></canvas>
+<video autoplay="" class="hover-video absolute inset-0 w-full h-full object-cover sepia brightness-90" loop="" muted="" playsinline="">
+<source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-brown-stone-texture-42353-large.mp4" type="video/mp4">
+</video>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-sm text-headline-sm text-inverse-surface uppercase tracking-wider italic">Tiger's Eye</h3>
+<span class="text-copper font-label-caps text-label-caps">₹16,700</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mb-6">The Solar Fortress. Chatoyant cut for focused intention and strength.</p>
+<button class="add-to-ritual-btn w-full border-05 border-copper py-3 text-copper font-label-caps text-label-caps uppercase hover:bg-copper hover:text-background transition-all">Add to Ritual</button>
+</div>
+</div>
+<!-- Aventurine -->
+<div class="product-card group bg-[#fff8f5] border-05 border-outline/20 pashan-shadow transition-all duration-500 overflow-hidden relative">
+<div class="h-64 relative bg-surface-container flex items-center justify-center overflow-hidden">
+<canvas class="gem-canvas absolute inset-0 transition-opacity duration-500" height="200" id="gem-aventurine" width="200"></canvas>
+<video autoplay="" class="hover-video absolute inset-0 w-full h-full object-cover hue-rotate-90 brightness-75" loop="" muted="" playsinline="">
+<source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-green-emerald-stones-42352-large.mp4" type="video/mp4">
+</video>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-sm text-headline-sm text-inverse-surface uppercase tracking-wider italic">Aventurine</h3>
+<span class="text-copper font-label-caps text-label-caps">₹11,500</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mb-6">The Vitality Prism. Radiant green facets for growth and abundance.</p>
+<button class="add-to-ritual-btn w-full border-05 border-copper py-3 text-copper font-label-caps text-label-caps uppercase hover:bg-copper hover:text-background transition-all">Add to Ritual</button>
+</div>
+</div>
+<!-- Sunstone -->
+<div class="product-card group bg-[#fff8f5] border-05 border-outline/20 pashan-shadow transition-all duration-500 overflow-hidden relative">
+<div class="h-64 relative bg-surface-container flex items-center justify-center overflow-hidden">
+<canvas class="gem-canvas absolute inset-0 transition-opacity duration-500" height="200" id="gem-sunstone" width="200"></canvas>
+<video autoplay="" class="hover-video absolute inset-0 w-full h-full object-cover saturate-150 brightness-110" loop="" muted="" playsinline="">
+<source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-sparkling-orange-minerals-42358-large.mp4" type="video/mp4">
+</video>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h3 class="font-headline-sm text-headline-sm text-inverse-surface uppercase tracking-wider italic">Sunstone</h3>
+<span class="text-copper font-label-caps text-label-caps">₹22,000</span>
+</div>
+<p class="font-body-sm text-on-surface-variant mb-6">The Surya Fragment. Copper-infused facets for divine energy.</p>
+<button class="add-to-ritual-btn w-full border-05 border-copper py-3 text-copper font-label-caps text-label-caps uppercase hover:bg-copper hover:text-background transition-all">Add to Ritual</button>
+</div>
+</div>
+</div>
+</section>
+<!-- NEW SECTION: Interactive Stone Finder (Quiz Entry) -->
+<section class="py-24 px-margin-desktop bg-surface-container">
+<div class="max-w-4xl mx-auto border-05 border-copper/30 p-12 md:p-20 text-center relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 border-t-05 border-r-05 border-copper/40 -translate-y-4 translate-x-4"></div>
+<div class="absolute bottom-0 left-0 w-32 h-32 border-b-05 border-l-05 border-copper/40 translate-y-4 -translate-x-4"></div>
+<span class="text-copper font-label-caps text-label-caps uppercase mb-4 block">Self-Discovery</span>
+<h2 class="font-headline-md text-headline-md text-inverse-surface mb-8 italic">Find your resonance</h2>
+<p class="font-body-lg text-on-surface-variant mb-12 max-w-2xl mx-auto italic">Unsure which stone aligns with your current journey? Take our Vedic assessment to discover the frequency your soul is seeking.</p>
+<a href="screen 2.html" class="bg-inverse-surface text-background px-12 py-5 font-label-caps text-label-caps uppercase tracking-widest hover:bg-copper transition-all duration-500 inline-flex items-center gap-4">
+            Start the Quiz <span class="material-symbols-outlined text-[18px]" data-icon="arrow_right_alt">arrow_right_alt</span>
+</a>
+</div>
+</section>
+<!-- Section 7: Ganga Jal Feature Canvas -->
+<section class="relative bg-teal-brand py-32 overflow-hidden">
+<canvas class="absolute inset-0 opacity-20" height="150" id="water-canvas" width="300"></canvas>
+<div class="max-w-container-max mx-auto px-margin-desktop relative z-10 flex flex-col items-center text-center">
+<span class="text-background/60 font-label-caps text-label-caps uppercase mb-4 block">The Purification</span>
+<h2 class="font-headline-md text-headline-md text-background mb-8 max-w-2xl italic">Consecrated by the flow of the Sacred Ganga</h2>
+<p class="font-body-md text-body-md text-background/80 max-w-3xl mb-12">Every PASHAN stone undergoes a purification ritual on the banks of the Ganges. Submerged in the flow of eternal life, the stones are cleared of past imprints and re-charged with pure, fluid consciousness.</p>
+<div class="w-24 h-[0.5px] bg-copper"></div>
+</div>
+</section>
+<!-- Section 8: Ritual Steps -->
+<section class="py-32 px-margin-desktop bg-background" id="rituals">
+<div class="text-center mb-20">
+<h2 class="font-headline-md text-headline-md text-inverse-surface italic">The Wearer's Ritual</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-5 border-05 border-outline/20">
+<!-- Step 1 -->
+<div class="p-12 border-05 border-outline/20 transition-colors duration-500 hover:bg-inverse-surface hover:text-background group">
+<span class="font-headline-sm text-[40px] text-copper/30 group-hover:text-copper block mb-6 italic">01</span>
+<h4 class="font-label-caps text-label-caps uppercase mb-4 tracking-widest italic">Arrival</h4>
+<p class="font-body-sm text-on-surface-variant group-hover:text-background/70">Unbox in a space of stillness. Respect the stone's journey.</p>
+</div>
+<!-- Step 2 -->
+<div class="p-12 border-05 border-outline/20 transition-colors duration-500 hover:bg-inverse-surface hover:text-background group">
+<span class="font-headline-sm text-[40px] text-copper/30 group-hover:text-copper block mb-6 italic">02</span>
+<h4 class="font-label-caps text-label-caps uppercase mb-4 tracking-widest italic">Invocation</h4>
+<p class="font-body-sm text-on-surface-variant group-hover:text-background/70">Hold the stone in your left hand. Set your primary intention.</p>
+</div>
+<!-- Step 3 -->
+<div class="p-12 border-05 border-outline/20 transition-colors duration-500 hover:bg-inverse-surface hover:text-background group">
+<span class="font-headline-sm text-[40px] text-copper/30 group-hover:text-copper block mb-6 italic">03</span>
+<h4 class="font-label-caps text-label-caps uppercase mb-4 tracking-widest italic">Alignment</h4>
+<p class="font-body-sm text-on-surface-variant group-hover:text-background/70">Place against the chakra point most aligned with its nature.</p>
+</div>
+<!-- Step 4 -->
+<div class="p-12 border-05 border-outline/20 transition-colors duration-500 hover:bg-inverse-surface hover:text-background group">
+<span class="font-headline-sm text-[40px] text-copper/30 group-hover:text-copper block mb-6 italic">04</span>
+<h4 class="font-label-caps text-label-caps uppercase mb-4 tracking-widest italic">Communion</h4>
+<p class="font-body-sm text-on-surface-variant group-hover:text-background/70">Wear for 21 days consecutively to anchor the frequency.</p>
+</div>
+<!-- Step 5 -->
+<div class="p-12 border-05 border-outline/20 transition-colors duration-500 hover:bg-inverse-surface hover:text-background group">
+<span class="font-headline-sm text-[40px] text-copper/30 group-hover:text-copper block mb-6 italic">05</span>
+<h4 class="font-label-caps text-label-caps uppercase mb-4 tracking-widest italic">Restoration</h4>
+<p class="font-body-sm text-on-surface-variant group-hover:text-background/70">Charge under the full moon once every cycle.</p>
+</div>
+</div>
+</section>
+<!-- Section 9: Collection Tiles -->
+<section class="h-screen w-full relative grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 overflow-hidden" id="collections">
+<div class="relative group overflow-hidden border-r border-background/10">
+<canvas class="absolute inset-0 z-0 bg-[#2c1a0e]" height="150" id="tile-canvas-1" width="300"></canvas>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity"></div>
+<div class="relative z-20 h-full flex flex-col justify-end p-12">
+<span class="text-copper font-label-caps text-label-caps uppercase mb-2">Architectural Series</span>
+<h3 class="font-headline-md text-headline-md text-background mb-6 italic">The Monolith</h3>
+<a class="text-background font-label-caps text-[10px] uppercase border-b border-copper inline-block pb-1 w-fit cursor-pointer" href="#products">View Details</a>
+</div>
+</div>
+<div class="relative group overflow-hidden border-r border-background/10">
+<canvas class="absolute inset-0 z-0 bg-[#3a251a]" height="150" id="tile-canvas-2" width="300"></canvas>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity"></div>
+<div class="relative z-20 h-full flex flex-col justify-end p-12">
+<span class="text-copper font-label-caps text-label-caps uppercase mb-2">Architectural Series</span>
+<h3 class="font-headline-md text-headline-md text-background mb-6 italic">Ethereal Flow</h3>
+<a class="text-background font-label-caps text-[10px] uppercase border-b border-copper inline-block pb-1 w-fit cursor-pointer" href="#products">View Details</a>
+</div>
+</div>
+<div class="relative group overflow-hidden border-r border-background/10">
+<canvas class="absolute inset-0 z-0 bg-[#2c1a0e]" height="150" id="tile-canvas-3" width="300"></canvas>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity"></div>
+<div class="relative z-20 h-full flex flex-col justify-end p-12">
+<span class="text-copper font-label-caps text-label-caps uppercase mb-2">Architectural Series</span>
+<h3 class="font-headline-md text-headline-md text-background mb-6 italic">The Core</h3>
+<a class="text-background font-label-caps text-[10px] uppercase border-b border-copper inline-block pb-1 w-fit cursor-pointer" href="#products">View Details</a>
+</div>
+</div>
+<div class="relative group overflow-hidden">
+<canvas class="absolute inset-0 z-0 bg-[#3a251a]" height="150" id="tile-canvas-4" width="300"></canvas>
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface to-transparent z-10 opacity-60 group-hover:opacity-40 transition-opacity"></div>
+<div class="relative z-20 h-full flex flex-col justify-end p-12">
+<span class="text-copper font-label-caps text-label-caps uppercase mb-2">Architectural Series</span>
+<h3 class="font-headline-md text-headline-md text-background mb-6 italic">Vedic Lines</h3>
+<a class="text-background font-label-caps text-[10px] uppercase border-b border-copper inline-block pb-1 w-fit cursor-pointer" href="#products">View Details</a>
+</div>
+</div>
+</section>
+<!-- Section 10: Testimonials -->
+<section class="py-32 px-margin-desktop bg-surface-container-high">
+<div class="max-w-4xl mx-auto text-center">
+<span class="material-symbols-outlined text-copper text-[48px] mb-8" data-icon="format_quote">format_quote</span>
+<p class="font-headline-sm text-headline-sm text-inverse-surface italic mb-10">"PASHAN is more than jewelry. Wearing their stones feels like carrying a piece of an ancient temple with me. The energy is grounded, precise, and undeniably sacred."</p>
+<div class="flex flex-col items-center">
+<span class="font-label-caps text-label-caps uppercase text-copper tracking-widest">Anjali Sharma</span>
+<span class="text-body-sm text-on-surface-variant">Vedic Architectural Consultant</span>
+</div>
+</div>
+</section>
+<!-- Section 11: Accordion FAQ -->
+<section class="py-32 px-margin-desktop bg-background">
+<div class="max-w-3xl mx-auto">
+<h2 class="font-headline-md text-headline-md text-inverse-surface mb-16 text-center italic">The Knowledge Base</h2>
+<div class="space-y-4">
+<div class="border-05 border-outline/20">
+<button class="w-full p-6 flex justify-between items-center text-left hover:bg-surface-container transition-colors cursor-pointer" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<span class="font-label-caps text-label-caps uppercase tracking-wider pointer-events-none">How are the stones certified?</span>
+<span class="material-symbols-outlined text-copper pointer-events-none" data-icon="expand_more">expand_more</span>
+</button>
+<div class="hidden p-6 pt-0 font-body-sm text-on-surface-variant leading-relaxed">
+                    All stones are third-party laboratory certified for authenticity and originate from ethical, artisanal mines in the Himalayan belt and southern India.
+                </div>
+</div>
+<div class="border-05 border-outline/20">
+<button class="w-full p-6 flex justify-between items-center text-left hover:bg-surface-container transition-colors cursor-pointer" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<span class="font-label-caps text-label-caps uppercase tracking-wider pointer-events-none">What is Sthapatya positioning?</span>
+<span class="material-symbols-outlined text-copper pointer-events-none" data-icon="expand_more">expand_more</span>
+</button>
+<div class="hidden p-6 pt-0 font-body-sm text-on-surface-variant leading-relaxed">
+                    It is the science of spatial alignment. We cut our stones to specific geometric proportions that resonate with the energetic grid of the human body.
+                </div>
+</div>
+<div class="border-05 border-outline/20">
+<button class="w-full p-6 flex justify-between items-center text-left hover:bg-surface-container transition-colors cursor-pointer" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<span class="font-label-caps text-label-caps uppercase tracking-wider pointer-events-none">Can I wear multiple stones?</span>
+<span class="material-symbols-outlined text-copper pointer-events-none" data-icon="expand_more">expand_more</span>
+</button>
+<div class="hidden p-6 pt-0 font-body-sm text-on-surface-variant leading-relaxed">
+                    Yes, provided they are energetically compatible. We recommend consulting our stone pairing guide for optimal resonance.
+                </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 12: CTA Section with Canvas -->
+<section class="relative py-40 overflow-hidden bg-inverse-surface">
+<canvas class="absolute inset-0 z-0 opacity-30" height="150" id="cta-canvas" width="300"></canvas>
+<div class="relative z-10 px-margin-desktop text-center">
+<h2 class="font-display-lg text-display-lg text-background mb-8 italic">Ready to begin your ritual?</h2>
+<p class="font-body-lg text-body-lg text-background/70 mb-12 max-w-2xl mx-auto">Join the PASHAN inner circle for early access to limited sacred stone drops and Vedic ritual guides.</p>
+<form class="flex flex-col md:flex-row justify-center gap-4 max-w-md mx-auto" onsubmit="event.preventDefault(); window.location.href='{{DATA:SCREEN:SCREEN_2}}';">
+<input class="bg-transparent border-05 border-background/30 text-background px-6 py-4 font-body-sm focus:border-copper focus:ring-0 transition-all flex-grow" placeholder="Your Soul's Email" type="email">
+<button class="bg-copper text-background px-8 py-4 font-label-caps text-label-caps uppercase tracking-widest hover:bg-background hover:text-inverse-surface transition-all cursor-pointer" type="submit" onclick="window.location.href='{{DATA:SCREEN:SCREEN_2}}';">Subscribe</button>
+</form>
+</div>
+</section>
+<!-- Section 13: Store Locator -->
+<section class="py-24 px-margin-desktop bg-surface-container-low text-center">
+<h3 class="font-label-caps text-label-caps uppercase text-copper mb-4 italic">Visit our Sanctum</h3>
+<p class="font-headline-sm text-headline-sm text-inverse-surface mb-2 italic">Rishikesh | Hampi | Bangalore</p>
+<p class="text-body-sm text-on-surface-variant">Open daily from Surya Uday to Surya Ast (Dawn to Dusk).</p>
+</section>
+<!-- Section 14: Footer -->
+<footer class="bg-inverse-surface py-20 px-margin-desktop border-t border-copper/20">
+<div class="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-16">
+<div class="col-span-1 md:col-span-1">
+<div class="flex flex-col mb-8">
+<span class="font-headline-md text-background text-[24px] tracking-widest leading-none italic">PASHAN</span>
+<span class="text-copper font-body-sm text-[12px] tracking-[0.4em] mt-1">पा षा ण</span>
+</div>
+<p class="font-body-sm text-background/50 leading-relaxed italic">Architecting the bridge between terrestrial earth and celestial spirit.</p>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-background uppercase mb-8 border-b border-copper/30 pb-2 w-fit italic">Rituals</h4>
+<ul class="space-y-4 font-body-sm text-background/70">
+<li class="hover:text-copper cursor-pointer transition-colors"><a href="#rituals" class="">Sacred Rituals</a></li>
+<li class="hover:text-copper cursor-pointer transition-colors"><a href="#products" class="">Gemstone Care</a></li>
+<li class="hover:text-copper cursor-pointer transition-colors"><a href="#rituals" class="">Vedic Alignment</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-background uppercase mb-8 border-b border-copper/30 pb-2 w-fit italic">Philosophy</h4>
+<ul class="space-y-4 font-body-sm text-background/70">
+<li class="hover:text-copper cursor-pointer transition-colors"><a href="#sthapatya" class="">Sthapatya Science</a></li>
+<li class="hover:text-copper cursor-pointer transition-colors"><a href="#philosophy" class="">Our Story</a></li>
+<li class="hover:text-copper cursor-pointer transition-colors"><a href="#philosophy" class="">Conscious Mining</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label-caps text-label-caps text-background uppercase mb-8 border-b border-copper/30 pb-2 w-fit italic">Support</h4>
+<ul class="space-y-4 font-body-sm text-background/70">
+<li class="hover:text-copper cursor-pointer transition-colors">Shipping &amp; Returns</li>
+<li class="hover:text-copper cursor-pointer transition-colors">Privacy Policy</li>
+<li class="hover:text-copper cursor-pointer transition-colors">Contact Us</li>
+</ul>
+</div>
+</div>
+<div class="mt-20 pt-8 border-t border-background/5 text-center">
+<p class="text-[10px] font-label-caps uppercase text-background/30 tracking-[0.2em]">© 2024 PASHAN - SACRED STONE ARCHITECTURE. ALL RIGHTS RESERVED.</p>
+</div>
+</footer>
+<script>
+    // Global Animation Logic
+    const state = {
+        time: 0,
+        gems: []
+    };
+
+    function drawGem(ctx, x, y, size, color, rotation) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(rotation);
+        
+        const faces = 7;
+        const step = (Math.PI * 2) / faces;
+        
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        for(let i = 0; i <= faces; i++) {
+            const angle = i * step;
+            const px = Math.cos(angle) * size;
+            const py = Math.sin(angle) * size;
+            ctx.fillStyle = i % 2 === 0 ? color : color + 'CC'; 
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(px, py);
+            const nextAngle = (i + 1) * step;
+            ctx.lineTo(Math.cos(nextAngle) * size, Math.sin(nextAngle) * size);
+            ctx.fill();
+        }
+
+        ctx.beginPath();
+        ctx.ellipse(-size/3, -size/3, size/4, size/6, Math.PI/4, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+        ctx.fill();
+        ctx.restore();
+    }
+
+    const heroCanvas = document.getElementById('hero-canvas');
+    const heroCtx = heroCanvas.getContext('2d');
+    function initHero() {
+        heroCanvas.width = window.innerWidth;
+        heroCanvas.height = window.innerHeight;
+        state.gems = [];
+        for(let i = 0; i < 15; i++) {
+            state.gems.push({
+                x: Math.random() * heroCanvas.width,
+                y: Math.random() * heroCanvas.height,
+                size: Math.random() * 40 + 20,
+                speed: Math.random() * 0.5 + 0.2,
+                rot: Math.random() * Math.PI,
+                rotSpeed: (Math.random() - 0.5) * 0.01,
+                color: i % 2 === 0 ? '#C17A3A' : '#D4A843'
+            });
+        }
+    }
+
+    function animate() {
+        state.time += 0.01;
+        
+        heroCtx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
+        state.gems.forEach(gem => {
+            gem.y -= gem.speed;
+            gem.rot += gem.rotSpeed;
+            if(gem.y < -50) gem.y = heroCanvas.height + 50;
+            const offsetX = Math.sin(state.time + gem.x) * 20;
+            drawGem(heroCtx, gem.x + offsetX, gem.y, gem.size, gem.color, gem.rot);
+        });
+
+        const wCanvas = document.getElementById('water-canvas');
+        if (wCanvas) {
+            const wCtx = wCanvas.getContext('2d');
+            wCanvas.width = wCanvas.offsetWidth;
+            wCanvas.height = wCanvas.offsetHeight;
+            wCtx.beginPath();
+            wCtx.moveTo(0, wCanvas.height/2);
+            for(let x = 0; x < wCanvas.width; x++) {
+                const y = Math.sin(x * 0.01 + state.time) * 20 + Math.sin(x * 0.02 + state.time * 0.5) * 10;
+                wCtx.lineTo(x, wCanvas.height/2 + y);
+            }
+            wCtx.strokeStyle = '#F5EFE6';
+            wCtx.lineWidth = 1;
+            wCtx.stroke();
+        }
+
+        const cardConfigs = [
+            {id: 'gem-amethyst', color: '#8b5cf6'},
+            {id: 'gem-tourmaline', color: '#1e293b'},
+            {id: 'gem-rose', color: '#fda4af'},
+            {id: 'gem-tiger', color: '#b45309'},
+            {id: 'gem-aventurine', color: '#15803d'},
+            {id: 'gem-sunstone', color: '#ea580c'}
+        ];
+
+        cardConfigs.forEach(conf => {
+            const c = document.getElementById(conf.id);
+            if(c) {
+                const ctx = c.getContext('2d');
+                ctx.clearRect(0,0,200,200);
+                drawGem(ctx, 100, 100 + Math.sin(state.time * 2) * 5, 40, conf.color, state.time);
+            }
+        });
+
+        ['tile-canvas-1', 'tile-canvas-2', 'tile-canvas-3', 'tile-canvas-4'].forEach((id, idx) => {
+            const c = document.getElementById(id);
+            if(c) {
+                const ctx = c.getContext('2d');
+                c.width = c.offsetWidth;
+                c.height = c.offsetHeight;
+                drawGem(ctx, c.width/2, c.height/2, 100, idx % 2 === 0 ? '#C17A3A' : '#D4A843', state.time * 0.5);
+            }
+        });
+
+        const ctaC = document.getElementById('cta-canvas');
+        if (ctaC) {
+            const ctaCtx = ctaC.getContext('2d');
+            ctaC.width = ctaC.offsetWidth;
+            ctaC.height = ctaC.offsetHeight;
+            for(let i = 0; i < 50; i++) {
+                ctaCtx.fillStyle = 'rgba(193, 122, 58, 0.1)';
+                ctaCtx.fillRect(Math.sin(i + state.time) * 200 + ctaC.width/2, i * 20, 2, 2);
+            }
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', initHero);
+    initHero();
+    animate();
+
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        const header = document.querySelector('header');
+        if (currentScroll > lastScroll && currentScroll > 100) {
+            header.style.transform = 'translateY(-100%)';
+        } else {
+            header.style.transform = 'translateY(32px)';
+        }
+        lastScroll = currentScroll;
+    });
+
+    document.querySelectorAll('.add-to-ritual-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const originalText = button.textContent;
+            button.textContent = 'Added to Ritual';
+            button.classList.add('!border-secondary', '!text-secondary');
+            button.classList.remove('border-copper', 'text-copper');
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.classList.remove('!border-secondary', '!text-secondary');
+                button.classList.add('border-copper', 'text-copper');
+            }, 2000);
+        });
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+</script>
+<a aria-label="Chat on WhatsApp" class="fixed bottom-6 right-6 z-[100] bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300" href="https://wa.me/917300763891" target="_blank">
+<svg fill="none" height="28" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg"><path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"></path><path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"></path></svg>
+</a>
+
+
+</body></html>
